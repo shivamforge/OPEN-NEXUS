@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Nexus</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+</head>
+
+<body>
+
+<header>
+    <nav>
+        <h2 class="logo">Open Nexus</h2>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#features">Domains</a></li>
+            <li><a href="#pricing">Plans</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="login.html">Login</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- HERO -->
+<section id="home" class="hero">
+    <h1>Build. Learn. Earn.</h1>
+    <p>Welcome to Open Nexus — where ideas turn into real products.</p>
+    <button class="cta-button">Get Started</button>
+</section>
+
+<!-- FEATURES -->
+<section id="features" class="features">
+    <h2>Our Domains</h2>
+
+    <div class="feature-item">
+        <h3>Machine Learning</h3>
+        <p>Build intelligent systems and AI solutions.</p>
+    </div>
+
+    <div class="feature-item">
+        <h3>Finance</h3>
+        <p>Explore markets, trading strategies, and analytics.</p>
+    </div>
+
+    <div class="feature-item">
+        <h3>Quantum Computing</h3>
+        <p>Dive into next-gen computation technologies.</p>
+    </div>
+
+    <div class="feature-item">
+        <h3>Web Development</h3>
+        <p>Create modern and scalable applications.</p>
+    </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" class="pricing">
+    <h2>Plans</h2>
+
+    <div class="pricing-plan">
+        <h3>Starter</h3>
+        <p>Free</p>
+        <button class="cta-button">Join Now</button>
+    </div>
+
+    <div class="pricing-plan">
+        <h3>Pro</h3>
+        <p>₹499/month</p>
+        <button class="cta-button">Upgrade</button>
+    </div>
+
+    <div class="pricing-plan">
+        <h3>Enterprise</h3>
+        <p>Contact Us</p>
+        <button class="cta-button">Contact</button>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<!-- CONTACT -->
+<section id="contact" class="contact">
+    <h2>Contact Us</h2>
+
+    <form id="contactForm">
+        <input type="text" id="name" placeholder="Your Name" required>
+        <input type="email" id="email" placeholder="Your Email" required>
+        <textarea id="message" placeholder="Your Message" required></textarea>
+        <button type="submit" class="cta-button">Send Message</button>
+    </form>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p>© 2026 Open Nexus. All rights reserved.</p>
+</footer>
+
+<!-- JS -->
+<script src="script.js"></script>
+
+</body>
+</html>

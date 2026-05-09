@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Open Nexus Login</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins', sans-serif;
+        }
+
+        body{
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:black;
+            color:white;
+        }
+
+        .login-container{
+
+            width:380px;
+            padding:40px;
+
+            background:#111;
+
+            border:1px solid gold;
+            border-radius:20px;
+
+            box-shadow:0 0 25px rgba(255,215,0,0.15);
+
+            text-align:center;
+        }
+
+        .login-container h1{
+
+            color:gold;
+            margin-bottom:10px;
+        }
+
+        .login-container p{
+
+            color:#aaa;
+            margin-bottom:30px;
+            font-size:14px;
+        }
+
+        .input-box{
+
+            width:100%;
+            padding:14px;
+
+            margin-bottom:20px;
+
+            border:none;
+            outline:none;
+
+            border-radius:10px;
+
+            background:#1c1c1c;
+            color:white;
+
+            border:1px solid #333;
+
+            transition:0.3s;
+        }
+
+        .input-box:focus{
+
+            border:1px solid gold;
+            box-shadow:0 0 10px rgba(255,215,0,0.3);
+        }
+
+        .btn{
+
+            width:100%;
+            padding:14px;
+
+            border:none;
+            border-radius:10px;
+
+            cursor:pointer;
+
+            font-size:16px;
+            font-weight:600;
+
+            margin-top:10px;
+
+            transition:0.3s;
+        }
+
+        .signup-btn{
+
+            background:linear-gradient(to right, gold, orange);
+            color:black;
+        }
+
+        .signup-btn:hover{
+
+            transform:scale(1.03);
+        }
+
+        .login-btn{
+
+            background:#222;
+            color:white;
+
+            border:1px solid gold;
+        }
+
+        .login-btn:hover{
+
+            background:gold;
+            color:black;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="login-container">
+
+        <h1>Open Nexus</h1>
+
+        <p>Build. Learn. Earn.</p>
+
+        <input 
+        id="email"
+        type="email"
+        placeholder="Enter your email"
+        class="input-box">
+
+        <input 
+        id="password"
+        type="password"
+        placeholder="Enter your password"
+        class="input-box">
+
+        <button 
+        onclick="signup()"
+        class="btn signup-btn">
+
+        Sign Up
+
+        </button>
+
+        <button 
+        onclick="login()"
+        class="btn login-btn">
+
+        Login
+
+        </button>
+
+    </div>
+
+    <script src="login.js"></script>
+
+</body>
+
+</html>

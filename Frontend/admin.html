@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Open Nexus Admin</title>
+
+    <!-- FONT -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- SUPABASE -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins', sans-serif;
+        }
+
+        body{
+
+            background:black;
+            color:white;
+
+            padding:40px;
+        }
+
+        h1{
+
+            color:gold;
+            margin-bottom:20px;
+            text-align:center;
+        }
+
+        .top-bar{
+
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+
+            margin-bottom:30px;
+        }
+
+        .logout-btn{
+
+            background:red;
+            color:white;
+
+            border:none;
+
+            padding:12px 20px;
+
+            border-radius:10px;
+
+            cursor:pointer;
+
+            font-weight:600;
+
+            transition:0.3s;
+        }
+
+        .logout-btn:hover{
+
+            transform:scale(1.05);
+
+            opacity:0.9;
+        }
+
+        #messages{
+
+            display:grid;
+            gap:20px;
+        }
+
+        .message-card{
+
+            background:#111;
+
+            border:1px solid gold;
+
+            border-radius:15px;
+
+            padding:20px;
+
+            box-shadow:0 0 15px rgba(255,215,0,0.1);
+
+            transition:0.3s;
+        }
+
+        .message-card:hover{
+
+            transform:translateY(-3px);
+
+            box-shadow:0 0 20px rgba(255,215,0,0.2);
+        }
+
+        .message-card h3{
+
+            color:gold;
+            margin-bottom:10px;
+        }
+
+        .message-card p{
+
+            margin-bottom:8px;
+            color:#ddd;
+        }
+
+        .email{
+
+            color:orange;
+            font-size:14px;
+        }
+
+        .time{
+
+            color:gray;
+            font-size:13px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="top-bar">
+
+        <h1>Open Nexus Admin Panel</h1>
+
+        <button onclick="logout()" class="logout-btn">
+            Logout
+        </button>
+
+    </div>
+
+    <div id="messages"></div>
+
+    <script src="admin.js"></script>
+
+</body>
+
+</html>
