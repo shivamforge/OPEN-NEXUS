@@ -1,10 +1,5 @@
-console.log("JS CONNECTED 🚀");
-
-const contactsupabase = window.supabase.createClient(
-  "https://jfglptsrjlkedvneehbj.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpmZ2xwdHNyamxrZWR2bmVlaGJqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0Mzc0MjksImV4cCI6MjA5MzAxMzQyOX0.4c3OCZCAtkMem_IdoEnkdrlIxCtG-ZHAjRalTUNpgR0"
-);
-
+console.log("SCRIPT VERSION 2");
+alert("NEW SCRIPT LOADED");
 const form = document.getElementById("contactForm");
 
 form.addEventListener("submit", async (e) => {
@@ -23,20 +18,6 @@ form.addEventListener("submit", async (e) => {
     button.innerText = "Sending...";
 
     try {
-
-        // SAVE TO SUPABASE
-        const { error } = await contactsupabase
-        .from("messages")
-        .insert([{ name, email, message }]);
-
-        if (error) {
-            console.log("SUPABASE ERROR:", error);
-            alert("Database Error");
-            return;
-        }
-
-        console.log("✅ Saved to Supabase");
-
         // SEND TO BACKEND
         const res = await fetch("http://127.0.0.1:8000/contact", {
             method: "POST",

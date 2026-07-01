@@ -19,7 +19,7 @@ const transporter = nodemailer.createTransport({
     }
 });
 app.post("/contact", async (req, res) => {
-    console.log("REQUEST RECEIVED");
+    console.log("REQUEST RECEIVED", Date.now());
     const { name, email, message } = req.body;
 
     try {
@@ -29,6 +29,7 @@ console.log("👉 USER EMAIL:", email);
         const { data, error } = await supabase
             .from("messages")
             .insert([{ name, email, message }]);
+            console.log("Inserted once");
 
         if (error) {
             console.error("❌ Supabase Error:", error);
