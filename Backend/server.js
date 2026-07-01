@@ -1,10 +1,15 @@
 import express from "express";
 import cors from "cors";
 import nodemailer from "nodemailer";
+import dotenv from "dotenv";
+
 import { createClient } from '@supabase/supabase-js'
+dotenv.config();
 
-const supabase = createClient("https://jfglptsrjlkedvneehbj.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpmZ2xwdHNyamxrZWR2bmVlaGJqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0Mzc0MjksImV4cCI6MjA5MzAxMzQyOX0.4c3OCZCAtkMem_IdoEnkdrlIxCtG-ZHAjRalTUNpgR0")
-
+const supabase = createClient(
+    process.env.SUPABASE_URL,
+    process.env.SUPABASE_KEY
+);
 const app = express();
 
 app.use(cors());
@@ -14,10 +19,9 @@ app.use(express.json());
 const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-        user: "shivamraj2160@gmail.com",        // 👈 your email
-        pass: "wnsxntuvwhqjrbcu"               // 👈 app password
-    }
-});
+       user: process.env.EMAIL_USER,
+       pass: process.env.EMAIL_PASS
+}});
 app.post("/contact", async (req, res) => {
     console.log("REQUEST RECEIVED", Date.now());
     const { name, email, message } = req.body;
@@ -83,7 +87,8 @@ app.get("/", (req, res) => {
     res.send("Backend is running 🚀");
 });
 
-app.listen(8000, () => {
-    console.log("🚀 Server running at http://localhost:8000");
-});
+const PORT = process.env.PORT || 8000;
 
+app.listen(PORT, () => {
+    console.log(`🚀 Server running on port ${PORT}`);
+});
