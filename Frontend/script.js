@@ -17,7 +17,7 @@ form.addEventListener("submit", async (e) => {
 
     try {
         // SEND TO BACKEND
-        const res = await fetch("http://127.0.0.1:8000/contact", {
+        const res = await fetch("https://open-nexus-backend.onrender.com/contact", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
