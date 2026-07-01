@@ -1,5 +1,3 @@
-console.log("SCRIPT VERSION 2");
-alert("NEW SCRIPT LOADED");
 const form = document.getElementById("contactForm");
 
 form.addEventListener("submit", async (e) => {
