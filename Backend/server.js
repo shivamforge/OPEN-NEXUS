@@ -1,72 +1,74 @@
 import express from "express";
 import cors from "cors";
 import nodemailer from "nodemailer";
-import { Resend } from "resend";
 import dotenv from "dotenv";
+import { createClient } from "@supabase/supabase-js";
 
-import { createClient } from '@supabase/supabase-js'
 dotenv.config();
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 const supabase = createClient(
-    process.env.SUPABASE_URL,
-    process.env.SUPABASE_KEY
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_KEY
 );
+
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-
+// Brevo SMTP
 const transporter = nodemailer.createTransport({
-    host: "smtp-relay.brevo.com",
-    port: 587,
-    secure: false,
-    auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS
-    }
+  host: "smtp-relay.brevo.com",
+  port: 587,
+  secure: false,
+  auth: {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
+  },
 });
+
 app.post("/contact", async (req, res) => {
-    console.log("REQUEST RECEIVED", Date.now());
-    const { name, email, message } = req.body;
+  console.log("REQUEST RECEIVED", Date.now());
 
-    try {
-console.log("👉 USER EMAIL:", email);
+  const { name, email, message } = req.body;
 
-// 🔥 1. SAVE TO SUPABASE
-        const { data, error } = await supabase
-            .from("messages")
-            .insert([{ name, email, message }]);
-            console.log("Inserted once");
+  try {
+    console.log("👉 USER EMAIL:", email);
 
-        if (error) {
-            console.error("❌ Supabase Error:", error);
-        } else {
-            console.log("✅ Data saved to DB");
-        }
+    // Save to Supabase
+    const { error } = await supabase
+      .from("messages")
+      .insert([{ name, email, message }]);
 
-// 🔥 STEP 1: Send to TEAM
-console.log("🔥 Step 1: sending to TEAM");
+    if (error) {
+      console.error("❌ Supabase Error:", error);
+    } else {
+      console.log("✅ Data saved to DB");
+    }
 
-await transporter.sendMail({
-    from: "Open Nexus <shivamraj2160@gmail.com>",
-    to: "sr3392780@gmail.com",
-    replyTo: email,
-    subject: "New Contact Message",
-    text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`
-});
+    // Mail to Team
+    console.log("🔥 Step 1: sending to TEAM");
 
-console.log("✅ Team mail sent");
+    await transporter.sendMail({
+      from: "Open Nexus <shivamraj2160@gmail.com>",
+      to: "sr3392780@gmail.com",
+      replyTo: email,
+      subject: "New Contact Message",
+      text: `Name: ${name}
+Email: ${email}
+Message: ${message}`,
+    });
 
-// 🔥 STEP 2: Send AUTO MAIL to USER
-console.log("🔥 Step 2: sending to USER");
+    console.log("✅ Team mail sent");
 
-await transporter.sendMail({
-    from: "Open Nexus <shivamraj2160@gmail.com>",
-    to: email,
-    subject: "We received your message 🚀",
-    text: `Hey ${name},
+    // Auto mail to User
+    console.log("🔥 Step 2: sending to USER");
+
+    await transporter.sendMail({
+      from: "Open Nexus <shivamraj2160@gmail.com>",
+      to: email,
+      subject: "We received your message 🚀",
+      text: `Hey ${name},
 
 Thanks for contacting Open Nexus!
 
@@ -75,25 +77,27 @@ We received your message:
 
 Our team will get back to you soon.
 
-— Open Nexus`
-});
+— Open Nexus`,
+    });
 
-console.log("✅ User mail sent");
+    console.log("✅ User mail sent");
 
-        res.json({ success: true });
-
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ success: false });
-    }
+    res.json({ success: true });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      error: error.message,
+    });
+  }
 });
 
 app.get("/", (req, res) => {
-    res.send("Backend is running 🚀");
+  res.send("Backend is running 🚀");
 });
 
 const PORT = process.env.PORT || 8000;
 
 app.listen(PORT, () => {
-    console.log(`🚀 Server running on port ${PORT}`);
+  console.log(`🚀 Server running on port ${PORT}`);
 });
