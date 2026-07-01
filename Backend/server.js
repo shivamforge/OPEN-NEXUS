@@ -1,10 +1,12 @@
 import express from "express";
 import cors from "cors";
 import nodemailer from "nodemailer";
+import { Resend } from "resend";
 import dotenv from "dotenv";
 
 import { createClient } from '@supabase/supabase-js'
 dotenv.config();
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 const supabase = createClient(
     process.env.SUPABASE_URL,
@@ -17,16 +19,13 @@ app.use(express.json());
 
 
 const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 587,
-  secure: false,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-  tls: {
-    rejectUnauthorized: false,
-  },
+    host: "smtp-relay.brevo.com",
+    port: 587,
+    secure: false,
+    auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS
+    }
 });
 app.post("/contact", async (req, res) => {
     console.log("REQUEST RECEIVED", Date.now());
