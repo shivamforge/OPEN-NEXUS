@@ -15,33 +15,37 @@ form.addEventListener("submit", async (e) => {
     button.disabled = true;
     button.innerText = "Sending...";
 
-    try {
-        // SEND TO BACKEND
-        const res = await fetch("https://open-nexus-backend.onrender.com/contact", {
+try {
+    const res = await fetch(
+        "https://open-nexus-backend.onrender.com/contact",
+        {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({ name, email, message })
-        });
+        }
+    );
 
-        const data = await res.json();
+    const data = await res.json();
 
-        console.log("✅ Backend Response:", data);
+    console.log("Backend HTTP Status:", res.status);
+    console.log("Backend Response:", data);
 
-        alert("Message Sent Successfully ✅");
-
-        form.reset();
-
-    } catch(err){
-
-        console.log("ERROR:", err);
-
-        alert("Something went wrong ❌");
-
-    } finally {
-
-        button.disabled = false;
-        button.innerText = "Send Message";
+    if (!res.ok || !data.success) {
+        throw new Error(data.error || `HTTP Error: ${res.status}`);
     }
+
+    alert("Message Sent Successfully ✅");
+    form.reset();
+
+} catch (err) {
+    console.error("Contact Form Error:", err);
+
+    alert(`Message could not be sent ❌\n${err.message}`);
+
+} finally {
+    button.disabled = false;
+    button.innerText = "Send Message";
+}
 });
