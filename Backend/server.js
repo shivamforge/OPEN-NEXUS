@@ -51,12 +51,18 @@ app.post("/contact", async (req, res) => {
     const { data: teamData, error: teamError } =
       await resend.emails.send({
         from: "Open Nexus <onboarding@resend.dev>",
-        to: ["shivamk.it.25@nitj.ac.in"],
+        to: ["shivamraj2160@gmail.com"],
         replyTo: email,
         subject: "New Contact Message",
-        text: `Name: ${name}
+        text: `New contact form submission
+
+Name: ${name}
 Email: ${email}
-Message: ${message}`,
+
+Message:
+${message}
+
+You can reply directly to this email to contact the visitor.`,
       });
 
     if (teamError) {
