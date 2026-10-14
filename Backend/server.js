@@ -51,7 +51,7 @@ app.post("/contact", async (req, res) => {
     const { data: teamData, error: teamError } =
       await resend.emails.send({
         from: "Open Nexus <onboarding@resend.dev>",
-        to: ["sr3392780@gmail.com"],
+        to: ["shivamk.it.25@nitj.ac.in"],
         replyTo: email,
         subject: "New Contact Message",
         text: `Name: ${name}
